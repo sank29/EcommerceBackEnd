@@ -17,9 +17,13 @@ public class Customer {
 	private String password;
 	private String email;
 	
+	private String type;
+	
 	public Customer() {
 		
 	}
+
+	
 
 	public Customer(Integer customerId, String name, String mobileNo, String password, String email) {
 		this.customerId = customerId;
@@ -70,6 +74,12 @@ public class Customer {
 	}
 	
 	
-	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 }
