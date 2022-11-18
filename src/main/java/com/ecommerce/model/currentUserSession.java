@@ -10,20 +10,20 @@ import javax.persistence.Id;
 
 
 @Entity
-public class currentUserSession {
+public class CurrentUserSession {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
 	
-	private Integer uuid;
+	private String uuid;
 	private LocalDateTime localDateTime;
 	
-	public currentUserSession() {
+	public CurrentUserSession() {
 		
 	}
 
-	public currentUserSession(Integer userId, Integer uuid, LocalDateTime localDateTime) {
+	public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDateTime) {
 		this.userId = userId;
 		this.uuid = uuid;
 		this.localDateTime = localDateTime;
@@ -37,11 +37,11 @@ public class currentUserSession {
 		this.userId = userId;
 	}
 
-	public Integer getUuid() {
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(Integer uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 
