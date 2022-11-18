@@ -2,8 +2,11 @@ package com.ecommerce.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ecommerce.model.currentUserSession;
+import com.ecommerce.model.CurrentUserSession;
 
-public interface SessionDao extends JpaRepository<currentUserSession, Integer> {
+public interface SessionDao extends JpaRepository<CurrentUserSession, Integer> {
+	
+	
+	public CurrentUserSession findByUuid(String uuid);
 
 }
