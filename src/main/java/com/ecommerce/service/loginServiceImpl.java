@@ -55,6 +55,7 @@ public class LoginServiceImpl implements LoginService {
 				
 				return "Login Successful as admin with key "+ key;
 				
+				
 			}else {
 				existingCustomer.setType("customer");
 			}
@@ -66,7 +67,9 @@ public class LoginServiceImpl implements LoginService {
 			return "Login Successful as customer with this key "+ key;
 		
 		}else {
+			
 			throw new LoginException("Please enter valid password");
+			
 		}
 		
 	}
