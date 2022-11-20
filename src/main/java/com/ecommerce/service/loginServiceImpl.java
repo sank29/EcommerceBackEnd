@@ -48,12 +48,28 @@ public class LoginServiceImpl implements LoginService {
 			
 			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerId(), key, LocalDateTime.now());
 			
+			if(existingCustomer.getPassword().equals("admin") && existingCustomer.getMobileNo().equals("1234567890")) {
+				
+				existingCustomer.setType("admin");
+				customerDao.save(existingCustomer);
+				
+				return "Login Successful as admin with key "+ key;
+				
+				
+			}else {
+				existingCustomer.setType("customer");
+			}
+			
+			customerDao.save(existingCustomer);
+			
 			sessionDao.save(currentUserSession);
 			
-			return "Login Successful with this "+ key;
+			return "Login Successful as customer with this key "+ key;
 		
 		}else {
+			
 			throw new LoginException("Please enter valid password");
+			
 		}
 		
 	}
