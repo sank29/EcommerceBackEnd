@@ -13,21 +13,28 @@ import javax.persistence.Id;
 public class CurrentUserSession {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
 	
 	private String uuid;
+	
+	private String userType;
+	
 	private LocalDateTime localDateTime;
 	
 	public CurrentUserSession() {
 		
 	}
 
+	
+
 	public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDateTime) {
+		super();
 		this.userId = userId;
 		this.uuid = uuid;
 		this.localDateTime = localDateTime;
 	}
+
+
 
 	public Integer getUserId() {
 		return userId;
@@ -52,6 +59,20 @@ public class CurrentUserSession {
 	public void setLocalDateTime(LocalDateTime localDateTime) {
 		this.localDateTime = localDateTime;
 	}
+
+
+
+	public String getUserType() {
+		return userType;
+	}
+
+
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
+	
 	
 
 }
