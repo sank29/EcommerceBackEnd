@@ -41,9 +41,11 @@ public class LoginServiceImpl implements LoginService {
 		if(validCustomerSessionOpt.isPresent()) {
 			
 			throw new LoginException("User already login");
+			
 		}
 		
 		if(existingCustomer.getPassword().equals(loginDTO.getPassword())) {
+			
 			String key = RandomString.make(10);
 			
 			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerId(), key, LocalDateTime.now());
@@ -51,13 +53,21 @@ public class LoginServiceImpl implements LoginService {
 			if(existingCustomer.getPassword().equals("admin") && existingCustomer.getMobileNo().equals("1234567890")) {
 				
 				existingCustomer.setType("admin");
+				currentUserSession.setUserType("admin");
+				currentUserSession.setUserId(existingCustomer.getCustomerId());
+				
+				sessionDao.save(currentUserSession);
 				customerDao.save(existingCustomer);
 				
 				return "Login Successful as admin with key "+ key;
 				
 				
 			}else {
+				
 				existingCustomer.setType("customer");
+				currentUserSession.setUserId(existingCustomer.getCustomerId());
+				currentUserSession.setUserType("customer");
+				
 			}
 			
 			customerDao.save(existingCustomer);
@@ -90,6 +100,24 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginException("Please enter valid key");
 			
 		}
+		
+		
+	}
+
+	@Override
+	public Boolean checkUserLoginOrNot(String key) throws LoginException {
+		
+		CurrentUserSession currentUserSession = sessionDao.findByUuid(key);
+		
+		if(currentUserSession != null) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+		}
+		
 		
 		
 	}

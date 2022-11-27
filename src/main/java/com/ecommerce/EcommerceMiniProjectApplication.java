@@ -7,7 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EcommerceMiniProjectApplication {
 
 	public static void main(String[] args) {
+		
+		
 		SpringApplication.run(EcommerceMiniProjectApplication.class, args);
+		
 	}
 
 }
+
+
