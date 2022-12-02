@@ -12,6 +12,7 @@ public interface CustomerProductDao extends JpaRepository<Product, Integer>{
 	
 	
 	@Query("from Product p where p.productName = ?1")
-	public Product findByNameInDataBase(String name);
+	public Product findByNameInDataBase(String productName);
+	
 
 }

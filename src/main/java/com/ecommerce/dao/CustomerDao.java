@@ -10,4 +10,5 @@ import com.ecommerce.model.Customer;
 public interface CustomerDao extends JpaRepository<Customer, Integer> {
 	
 	public Customer findByMobileNo(String mobileNo);
+	
 }
