@@ -1,5 +1,6 @@
 package com.ecommerce.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -17,15 +19,19 @@ import javax.persistence.OneToOne;
 @Entity
 public class Cart {
 	
+	
+	/// ??? auto generate required or not ????
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer cartId;
+	private Integer cartIdOrCustomerId;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+//	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	private List<Product> listOfProductsInCart;
 	
 	
-	@OneToOne
+	@OneToOne()
 	private Customer customer;
 
 	public Cart() {
@@ -34,9 +40,9 @@ public class Cart {
 
 	
 
-	public Cart(Integer cartId, List<Product> listOfProductsInCart, Customer customer) {
+	public Cart(Integer cartIdOrCustomerId, List<Product> listOfProductsInCart, Customer customer) {
 		super();
-		this.cartId = cartId;
+		this.cartIdOrCustomerId = cartIdOrCustomerId;
 		this.listOfProductsInCart = listOfProductsInCart;
 		this.customer = customer;
 	}
@@ -62,13 +68,13 @@ public class Cart {
 
 
 	public Integer getCartId() {
-		return cartId;
+		return cartIdOrCustomerId;
 	}
 
 
 
-	public void setCartId(Integer cartId) {
-		this.cartId = cartId;
+	public void setCartId(Integer cartIdOrCustomerId) {
+		this.cartIdOrCustomerId = cartIdOrCustomerId;
 	}
 
 	

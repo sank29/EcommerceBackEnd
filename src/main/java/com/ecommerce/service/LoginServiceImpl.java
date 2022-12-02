@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.dao.CartDao;
 import com.ecommerce.dao.CustomerDao;
 import com.ecommerce.dao.SessionDao;
 import com.ecommerce.exception.LoginException;
+import com.ecommerce.model.Cart;
 import com.ecommerce.model.CurrentUserSession;
 import com.ecommerce.model.Customer;
 import com.ecommerce.model.LoginDTO;
@@ -25,6 +27,9 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
 	SessionDao sessionDao;
+	
+	@Autowired
+	CartDao cartDao;
 	
 	@Override
 	public String logIntoAccount(LoginDTO loginDTO) throws LoginException {
@@ -67,6 +72,8 @@ public class LoginServiceImpl implements LoginService {
 				existingCustomer.setType("customer");
 				currentUserSession.setUserId(existingCustomer.getCustomerId());
 				currentUserSession.setUserType("customer");
+				
+			
 				
 			}
 			

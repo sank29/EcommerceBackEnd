@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.lang.Nullable;
+
 
 @Entity
 public class Product {
@@ -29,8 +31,8 @@ public class Product {
 	@ManyToMany(cascade = CascadeType.ALL)
 	List<Customer> listOfCutomerBoughtThisProduct;
 	
-	@ManyToOne
-	private Cart cart;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Cart> listOfCarts;
 	
 	
 	private Boolean prodcutStatusInCart = false;
@@ -45,15 +47,13 @@ public class Product {
 	
 
 	public Product(Integer productid, String productName, String type, Integer quantity, double price,
-			List<Customer> listOfCutomerBoughtThisProduct, Cart cart, Boolean prodcutStatusInCart) {
+			List<Customer> listOfCutomerBoughtThisProduct,  Boolean prodcutStatusInCart) {
 		super();
 		this.productid = productid;
 		this.productName = productName;
 		this.type = type;
 		this.quantity = quantity;
 		this.price = price;
-		this.listOfCutomerBoughtThisProduct = listOfCutomerBoughtThisProduct;
-		this.cart = cart;
 		this.prodcutStatusInCart = prodcutStatusInCart;
 	}
 
@@ -116,16 +116,6 @@ public class Product {
 
 	public void setListOfCutomerBoughtThisProduct(List<Customer> listOfCutomerBoughtThisProduct) {
 		this.listOfCutomerBoughtThisProduct = listOfCutomerBoughtThisProduct;
-	}
-
-
-	public Cart getCart() {
-		return cart;
-	}
-
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
 	}
 
 

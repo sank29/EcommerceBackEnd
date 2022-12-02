@@ -7,14 +7,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.exception.CustomerException;
 import com.ecommerce.exception.LoginException;
 import com.ecommerce.exception.ProductException;
+import com.ecommerce.model.CurrentUserSession;
+import com.ecommerce.model.Customer;
 import com.ecommerce.model.Product;
 import com.ecommerce.service.LoginService;
 import com.ecommerce.service.CustomerProductService;
+import com.ecommerce.service.CustomerService;
 
 @RestController
 public class CustomerProductController {
@@ -24,6 +30,9 @@ public class CustomerProductController {
 	
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	CustomerService customerService;
 	
 	
 	@GetMapping("/product/name")
@@ -67,5 +76,27 @@ public class CustomerProductController {
 		
 		
 	}
+	
+	@PostMapping("/addtocart")
+	public ResponseEntity<Product> addToCart(@RequestParam String key, @RequestBody Product product) throws ProductException, LoginException, CustomerException{
+		
+		if(loginService.checkUserLoginOrNot(key)) {
+			
+			Customer customer = customerService.getCustomerByUuid(key);
+			
+			Product databaseProduct = customerProductService.buyProductAndAddToCart(product, customer);
+			
+			return new ResponseEntity<Product>(databaseProduct,HttpStatus.ACCEPTED);
+			
+		}else {
+			
+			throw new LoginException("Invalid key or please login first");
+			
+		}
+		
+		
+	}
+	
+	
 
 }

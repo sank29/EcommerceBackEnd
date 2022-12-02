@@ -29,16 +29,12 @@ public class Customer {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Product> listOfProductBoughtByCustomer;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Cart cart;
 	
 	public Customer() {
 		
 	}
-
-	
-
-	
 
 	public Customer(Integer customerId, String name, String mobileNo, String password, String email, String type,
 			List<Product> listOfProductBoughtByCustomer, Cart cart) {
@@ -52,9 +48,6 @@ public class Customer {
 		this.listOfProductBoughtByCustomer = listOfProductBoughtByCustomer;
 		this.cart = cart;
 	}
-
-
-
 
 
 	public Integer getCustomerId() {
