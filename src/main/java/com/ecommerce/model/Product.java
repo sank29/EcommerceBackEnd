@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.lang.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Product {
@@ -32,14 +34,11 @@ public class Product {
 	List<Customer> listOfCutomerBoughtThisProduct;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Cart> listOfCarts;
-	
 	
 	private Boolean prodcutStatusInCart = false;
 	
-	
-
-
 	public Product() {
 		super();
 	}
@@ -127,6 +126,23 @@ public class Product {
 	public void setProdcutStatusInCart(Boolean prodcutStatusInCart) {
 		this.prodcutStatusInCart = prodcutStatusInCart;
 	}
+	
+	
+
+
+
+	public List<Cart> getListOfCarts() {
+		return listOfCarts;
+	}
+
+
+
+	public void setListOfCarts(List<Cart> listOfCarts) {
+		this.listOfCarts = listOfCarts;
+	}
+
+
+
 	
 	
 	

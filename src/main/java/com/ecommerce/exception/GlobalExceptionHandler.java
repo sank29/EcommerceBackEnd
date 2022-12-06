@@ -51,6 +51,42 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(myErrorDetails,HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(CartException.class)
+	public ResponseEntity<MyErrorDetails> cartExceptionHandler(CartException cartException, WebRequest webRequest){
+		
+		MyErrorDetails myErrorDetails = new MyErrorDetails();
+		
+		myErrorDetails.setDetails(webRequest.getDescription(false));
+		myErrorDetails.setErrorMsg(cartException.getMessage());
+		myErrorDetails.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<MyErrorDetails>(myErrorDetails,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(PaymentException.class)
+	public ResponseEntity<MyErrorDetails> paymentExceptionHandler(PaymentException paymentException, WebRequest webRequest){
+		
+		MyErrorDetails myErrorDetails = new MyErrorDetails();
+		
+		myErrorDetails.setDetails(webRequest.getDescription(false));
+		myErrorDetails.setErrorMsg(paymentException.getMessage());
+		myErrorDetails.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<MyErrorDetails>(myErrorDetails,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(TotalBillInCartException.class)
+	public ResponseEntity<MyErrorDetails> totalBillInCartExceptionHandler(TotalBillInCartException totalBillInCartException, WebRequest webRequest){
+		
+		MyErrorDetails myErrorDetails = new MyErrorDetails();
+		
+		myErrorDetails.setDetails(webRequest.getDescription(false));
+		myErrorDetails.setErrorMsg(totalBillInCartException.getMessage());
+		myErrorDetails.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<MyErrorDetails>(myErrorDetails,HttpStatus.BAD_REQUEST);
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> handleAllException(Exception exception, WebRequest webRequest) {
 		
