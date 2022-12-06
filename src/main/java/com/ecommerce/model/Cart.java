@@ -27,7 +27,8 @@ public class Cart {
 	private Integer cartIdOrCustomerId;
 	
 //	@ManyToMany(cascade = CascadeType.ALL)
-	@ManyToMany()
+	@ElementCollection
+	@ManyToMany
 	private List<Product> listOfProductsInCart;
 	
 	
