@@ -55,8 +55,6 @@ public class Product {
 	
 	private Boolean prodcutStatusInCart = false;
 	
-	
-	
 }
 
 
