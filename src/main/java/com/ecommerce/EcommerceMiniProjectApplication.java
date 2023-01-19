@@ -9,10 +9,11 @@ public class EcommerceMiniProjectApplication {
 	public static void main(String[] args) {
 		
 		
-		SpringApplication.run(EcommerceMiniProjectApplication.class, args);
+		SpringApplication.run(EcommerceMiniProjectApplication.class, args); 
+		
+		
 		
 	}
 
 }
-
 

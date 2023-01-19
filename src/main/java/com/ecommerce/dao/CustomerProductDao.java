@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.ecommerce.model.Product;
 
 @Repository
-public interface CustomerProductDao extends JpaRepository<Product, Integer>{
+public interface CustomerProductDao extends JpaRepository<Product, String>{
 	
 	
 	
