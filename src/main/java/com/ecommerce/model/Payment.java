@@ -1,6 +1,7 @@
 package com.ecommerce.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +12,19 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 public class Payment {
 	
 	@Id
@@ -35,75 +47,7 @@ public class Payment {
 	
 	private Integer TotalBillPaid;
 
-	public Payment() {
-		super();
-	}
-
-	public Payment(Integer paymentId, LocalDateTime localDateTime, Customer customer, String modeOfPayment,
-			Boolean paymentStatus) {
-		super();
-		this.paymentId = paymentId;
-		this.localDateTime = localDateTime;
-		this.customer = customer;
-		this.modeOfPayment = modeOfPayment;
-		this.paymentStatus = paymentStatus;
-	}
-
-	public Integer getPaymentId() {
-		return paymentId;
-	}
-
-	public void setPaymentId(Integer paymentId) {
-		this.paymentId = paymentId;
-	}
-
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
-	}
-
-	public void setLocalDateTime(LocalDateTime localDateTime) {
-		this.localDateTime = localDateTime;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public String getModeOfPayment() {
-		return modeOfPayment;
-	}
-
-	public void setModeOfPayment(String modeOfPayment) {
-		this.modeOfPayment = modeOfPayment;
-	}
-
-	public Boolean getPaymentStatus() {
-		return paymentStatus;
-	}
-
-	public void setPaymentStatus(Boolean paymentStatus) {
-		this.paymentStatus = paymentStatus;
-	}
-
-	public TotalBillInCart getTotalBillInCart() {
-		return totalBillInCart;
-	}
-
-	public void setTotalBillInCart(TotalBillInCart totalBillInCart) {
-		this.totalBillInCart = totalBillInCart;
-	}
-
-	public Integer getTotalBillPaid() {
-		return TotalBillPaid;
-	}
-
-	public void setTotalBillPaid(Integer totalBillPaid) {
-		TotalBillPaid = totalBillPaid;
-	}
+	
 	
 	
 	

@@ -38,7 +38,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 			if(databaseProduct == null) {
 				
 				product.setProdcutStatusInCart(false);
-				product.setListOfCutomerBoughtThisProduct(null);
+//				product.setListOfCutomerBoughtThisProduct(null);
 				
 				
 				return adminProductDao.save(product);

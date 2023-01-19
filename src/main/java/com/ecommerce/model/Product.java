@@ -13,139 +13,63 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
+@NoArgsConstructor
+
+@Data
+@Getter
+@Setter
 public class Product {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer productid;
 	
+	@Id
 	private String productName;
+	
+	
 	private String type;
 	private Integer quantity;
 	private double price;
+	private String productImg;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	List<Customer> listOfCutomerBoughtThisProduct;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	List<Customer> listOfCutomerBoughtThisProduct;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JsonIgnore
-	private List<Cart> listOfCarts;
+	private Cart cart;
 	
 	private Boolean prodcutStatusInCart = false;
 	
-	public Product() {
-		super();
-	}
-
-	
-
-	public Product(Integer productid, String productName, String type, Integer quantity, double price,
-			List<Customer> listOfCutomerBoughtThisProduct,  Boolean prodcutStatusInCart) {
-		super();
-		this.productid = productid;
-		this.productName = productName;
-		this.type = type;
-		this.quantity = quantity;
-		this.price = price;
-		this.prodcutStatusInCart = prodcutStatusInCart;
-	}
-
-
-
-	public Integer getProductid() {
-		return productid;
-	}
-
-
-	public void setProductid(Integer productid) {
-		this.productid = productid;
-	}
-
-
-	public String getProductName() {
-		return productName;
-	}
-
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-
-	public String getType() {
-		return type;
-	}
-
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-
-	public double getPrice() {
-		return price;
-	}
-
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-
-	public List<Customer> getListOfCutomerBoughtThisProduct() {
-		return listOfCutomerBoughtThisProduct;
-	}
-
-
-	public void setListOfCutomerBoughtThisProduct(List<Customer> listOfCutomerBoughtThisProduct) {
-		this.listOfCutomerBoughtThisProduct = listOfCutomerBoughtThisProduct;
-	}
-
-
-	public Boolean getProdcutStatusInCart() {
-		return prodcutStatusInCart;
-	}
-
-
-	public void setProdcutStatusInCart(Boolean prodcutStatusInCart) {
-		this.prodcutStatusInCart = prodcutStatusInCart;
-	}
 	
 	
-
-
-
-	public List<Cart> getListOfCarts() {
-		return listOfCarts;
-	}
-
-
-
-	public void setListOfCarts(List<Cart> listOfCarts) {
-		this.listOfCarts = listOfCarts;
-	}
-
-
-
-	
-	
-	
-	
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

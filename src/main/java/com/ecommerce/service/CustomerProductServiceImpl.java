@@ -78,35 +78,77 @@ public class CustomerProductServiceImpl implements CustomerProductService{
 	@Override
 	public Product buyProductAndAddToCart(Product product, Customer customer) throws ProductException {
 		
-		Optional<Product> databaseProduct = customerProductDao.findById(product.getProductid());
+		Optional<Product> databaseProduct = customerProductDao.findById(product.getProductName());
+		
 		
 		if(databaseProduct.isPresent()) {
 			
+			// check if produc is already added in cart if yes then only add the quantity and then save
+			
+			Boolean flag  = false;
+			
+			List<Product> listOfProduct = customer.getCart().getListOfProductsInCart();
+			
+			for(Product eachProduct: listOfProduct) {
+				
+				if(eachProduct.getProductName().equals(databaseProduct.get().getProductName())) {
+					
+					flag = true;
+					
+				}
+				
+			} 
+			
 			if(databaseProduct.get().getQuantity() > product.getQuantity()) {
 				
-				product.setPrice(databaseProduct.get().getPrice());
+				if(flag) {
+					
+					for(Product eachProduct: listOfProduct) {
+						
+						if(eachProduct.getProductName().equals(databaseProduct.get().getProductName())) {
+							int quantity = product.getQuantity();
+							int presentQuntity = eachProduct.getQuantity();
+							
+							eachProduct.setQuantity(quantity + presentQuntity);
+							
+						}
+						
+					} 
+					
+					customer.getCart().setListOfProductsInCart(listOfProduct); 
+					
+					
+					customerDao.save(customer);
+					
+				}else {
+					
+					product.setPrice(databaseProduct.get().getPrice());
+					
+					product.setProductName(databaseProduct.get().getProductName());
+					
+					product.setType(databaseProduct.get().getType());
+					
+					product.setQuantity(product.getQuantity());
+					
+//					System.out.println("*****");
+//					customer.getListOfProductBoughtByCustomer().forEach(eachProduct -> eachProduct.getListOfCarts().add(customer.getCart()));
+//					System.out.println("*****");
+					
+					customer.getCart().getListOfProductsInCart().add(product);
+					
+					
+					customer.getCart().setCustomer(customer);
+					
+					databaseProduct.get().setQuantity(databaseProduct.get().getQuantity() - product.getQuantity());
+					 
+					customerDao.save(customer);
+					
+					adminProductDao.save(databaseProduct.get());// this line is overriding the existing data in cart product added.
+					
+					
+				}
 				
-				product.setProductName(databaseProduct.get().getProductName());
 				
-				product.setType(databaseProduct.get().getType());
-				
-				product.setQuantity(product.getQuantity());
-				
-				System.out.println("*****");
-				customer.getListOfProductBoughtByCustomer().forEach(eachProduct -> eachProduct.getListOfCarts().add(customer.getCart()));
-				System.out.println("*****");
-				
-				customer.getCart().getListOfProductsInCart().add(product);
-				
-				
-				customer.getCart().setCustomer(customer);
-				
-				
-				databaseProduct.get().setQuantity(databaseProduct.get().getQuantity() - product.getQuantity());
-				 
-				customerDao.save(customer);
-				
-				adminProductDao.save(databaseProduct.get());// this line is overriding the existing data in cart product added.
 				
 				return product;
 				

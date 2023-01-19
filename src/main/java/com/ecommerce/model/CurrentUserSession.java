@@ -1,15 +1,27 @@
 package com.ecommerce.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 public class CurrentUserSession {
 	
 	@Id
@@ -21,9 +33,7 @@ public class CurrentUserSession {
 	
 	private LocalDateTime localDateTime;
 	
-	public CurrentUserSession() {
-		
-	}
+
 
 	
 
@@ -36,41 +46,7 @@ public class CurrentUserSession {
 
 
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
-	}
-
-	public void setLocalDateTime(LocalDateTime localDateTime) {
-		this.localDateTime = localDateTime;
-	}
-
-
-
-	public String getUserType() {
-		return userType;
-	}
-
-
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
+	
 	
 	
 	

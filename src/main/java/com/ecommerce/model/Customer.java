@@ -13,14 +13,25 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
 	
-	private String name;
+	private String name; 
 	private String mobileNo;
 	private String password;
 	private String email;
@@ -36,102 +47,7 @@ public class Customer {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Payment> payment;
 	
-	
-	public Customer() {
-		
-	}
-
-	public Customer(Integer customerId, String name, String mobileNo, String password, String email, String type,
-			List<Product> listOfProductBoughtByCustomer, Cart cart) {
-		super();
-		this.customerId = customerId;
-		this.name = name;
-		this.mobileNo = mobileNo;
-		this.password = password;
-		this.email = email;
-		this.type = type;
-		this.listOfProductBoughtByCustomer = listOfProductBoughtByCustomer;
-		this.cart = cart;
-	}
-
-
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-
-
-	public List<Product> getListOfProductBoughtByCustomer() {
-		return listOfProductBoughtByCustomer;
-	}
-
-
-
-	public void setListOfProductBoughtByCustomer(List<Product> listOfProductBoughtByCustomer) {
-		this.listOfProductBoughtByCustomer = listOfProductBoughtByCustomer;
-	}
-
-
-
-
-
-	public Cart getCart() {
-		return cart;
-	}
-
-
-
-
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-	
-	
-
 }
+
+
+

@@ -15,6 +15,7 @@ import com.ecommerce.model.Cart;
 import com.ecommerce.model.CurrentUserSession;
 import com.ecommerce.model.Customer;
 import com.ecommerce.model.LoginDTO;
+import com.ecommerce.model.LoginUUIDKey;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -32,7 +33,9 @@ public class LoginServiceImpl implements LoginService {
 	CartDao cartDao;
 	
 	@Override
-	public String logIntoAccount(LoginDTO loginDTO) throws LoginException {
+	public LoginUUIDKey logIntoAccount(LoginDTO loginDTO) throws LoginException {
+		
+		LoginUUIDKey loginUUIDKey = new LoginUUIDKey();
 		
 		Customer existingCustomer = customerDao.findByMobileNo(loginDTO.getMobileNo());
 		
@@ -64,7 +67,11 @@ public class LoginServiceImpl implements LoginService {
 				sessionDao.save(currentUserSession);
 				customerDao.save(existingCustomer);
 				
-				return "Login Successful as admin with key "+ key;
+				loginUUIDKey.setMsg("Login Successful as admin with key");
+				
+				loginUUIDKey.setUuid(key);
+				
+				return loginUUIDKey;
 				
 				
 			}else {
@@ -81,7 +88,11 @@ public class LoginServiceImpl implements LoginService {
 			
 			sessionDao.save(currentUserSession);
 			
-			return "Login Successful as customer with this key "+ key;
+			loginUUIDKey.setMsg("Login Successful as customer with this key");
+			
+			loginUUIDKey.setUuid(key);
+			
+			return loginUUIDKey;
 		
 		}else {
 			

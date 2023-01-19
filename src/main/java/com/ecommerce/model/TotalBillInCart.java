@@ -9,7 +9,18 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 public class TotalBillInCart {
 	
 	@Id
@@ -23,41 +34,7 @@ public class TotalBillInCart {
 	@OneToOne
 	private Payment payment;
 
-	public TotalBillInCart() {
-		super();
-	}
 
-	public TotalBillInCart(Integer billReciptNumber, List<Product> listOfProductInCart, Integer totalBill) {
-		super();
-		this.billReciptNumber = billReciptNumber;
-		this.listOfProductInCart = listOfProductInCart;
-		this.totalBill = totalBill;
-	}
-
-	public Integer getBillReciptNumber() {
-		return billReciptNumber;
-	}
-
-	public void setBillReciptNumber(Integer billReciptNumber) {
-		this.billReciptNumber = billReciptNumber;
-	}
-
-	public List<Product> getListOfProductInCart() {
-		return listOfProductInCart;
-	}
-
-	public void setListOfProductInCart(List<Product> listOfProductInCart) {
-		this.listOfProductInCart = listOfProductInCart;
-	}
-
-	public Integer getTotalBill() {
-		return totalBill;
-	}
-
-	public void setTotalBill(Integer totalBill) {
-		this.totalBill = totalBill;
-	}
-	
 	
 
 }

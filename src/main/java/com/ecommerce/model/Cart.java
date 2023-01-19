@@ -15,8 +15,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 public class Cart {
 	
 	
@@ -28,57 +39,14 @@ public class Cart {
 	
 //	@ManyToMany(cascade = CascadeType.ALL)
 	@ElementCollection
-	@ManyToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> listOfProductsInCart;
 	
 	
-	@OneToOne()
+	@OneToOne
 	private Customer customer;
 
-	public Cart() {
-		super();
-	}
-
-	
-
-	public Cart(Integer cartIdOrCustomerId, List<Product> listOfProductsInCart, Customer customer) {
-		super();
-		this.cartIdOrCustomerId = cartIdOrCustomerId;
-		this.listOfProductsInCart = listOfProductsInCart;
-		this.customer = customer;
-	}
-
-
-
-	public List<Product> getListOfProductsInCart() {
-		return listOfProductsInCart;
-	}
-
-	public void setListOfProductsInCart(List<Product> listOfProductsInCart) {
-		this.listOfProductsInCart = listOfProductsInCart;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-
-
-	public Integer getCartId() {
-		return cartIdOrCustomerId;
-	}
-
-
-
-	public void setCartId(Integer cartIdOrCustomerId) {
-		this.cartIdOrCustomerId = cartIdOrCustomerId;
-	}
-
-	
-	
+	@ManyToMany
+	private List<CartProductDTO> listOfProductInCart1;
 	
 }
